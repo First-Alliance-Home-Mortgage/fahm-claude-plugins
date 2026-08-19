@@ -48,19 +48,14 @@ automatically once the teammate trusts the folder — no separate prompt, no ins
 Enable `fahm-encompass` only in repos that actually touch Encompass. Marketplace state itself lives
 once per user in `~/.claude/plugins/known_marketplaces.json`, not per project.
 
-## Not pushed yet
+## Published
 
-This repository exists locally only. To publish it:
+The marketplace lives at `First-Alliance-Home-Mortgage/fahm-claude-plugins` and `main` is pushed.
+Teammates install with the three commands under [Install](#install) above.
 
-1. In the GitHub UI, create `First-Alliance-Home-Mortgage/fahm-claude-plugins` as **Private**. Do
-   **not** initialise it with a README, `.gitignore` or licence — this repo already has all three, and
-   an initialised remote forces a merge on the first push.
-2. `git remote add origin git@github.com:First-Alliance-Home-Mortgage/fahm-claude-plugins.git`
-3. `git push -u origin main`
-4. Re-verify from the remote on a second machine. That is the only real test of the relative plugin
-   sources.
-
-Confirm first that the account creating it holds repo-creation rights in the org.
+Still unverified: nobody has added this marketplace from a **second machine**. A fresh clone is the
+only real test of the relative plugin sources in `marketplace.json`, since they resolve against the
+clone rather than against this working copy.
 
 > Keeping `plugins/` **inside** this repository is deliberate, not just tidy. For the claude.ai
 > Team/Enterprise plugin-sync path, private plugin sources must share the marketplace repo's owner —
