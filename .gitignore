@@ -1,0 +1,54 @@
+# ── Secrets and credential material ──────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.cer
+*.crt
+*.publishsettings
+*.pubxml
+*.pubxml.user
+credentials.json
+users.json
+secrets.*
+
+# ── Exported data ────────────────────────────────────────────────────────────
+# Deliberate blanket denial. This repository documents a mortgage lender's LOS
+# integration, and API field exports, loan-volume spreadsheets and Postman
+# collections live one folder away in OneDrive. Reference material here is
+# AUTHORED as markdown, never committed as an export.
+#
+# If a specific derived file must ever be tracked, add an explicit "!" exception
+# in the same commit as a human review. Never `git add -f`.
+*.csv
+*.xlsx
+*.xls
+*.docx
+*.doc
+*.pptx
+*.ppt
+*.pdf
+*.zip
+*.har
+*.postman_collection.json
+*.postman_environment.json
+
+# ── Local Claude Code state ──────────────────────────────────────────────────
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# ── Tooling ──────────────────────────────────────────────────────────────────
+node_modules/
+*.log
+.cache/
+coverage/
+
+# ── Editors and OS ───────────────────────────────────────────────────────────
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+.DS_Store

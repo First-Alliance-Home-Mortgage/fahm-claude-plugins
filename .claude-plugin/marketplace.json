@@ -1,0 +1,27 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "fahm-claude-plugins",
+  "description": "Internal Claude Code plugins for First Alliance Home Mortgage: documentation tooling and the ICE Encompass Developer Connect integration reference.",
+  "version": "1.0.0",
+  "owner": {
+    "name": "First Alliance Home Mortgage",
+    "email": "rrebucas@fahmloans.com",
+    "url": "https://github.com/First-Alliance-Home-Mortgage"
+  },
+  "plugins": [
+    {
+      "name": "fahm-docs",
+      "source": "./plugins/fahm-docs",
+      "description": "Answer questions from a project's own documentation with citations and drift reporting, write and repair engineering and KB docs, and produce project turnover packs.",
+      "category": "documentation",
+      "tags": ["documentation", "runbook", "turnover", "knowledge-base"]
+    },
+    {
+      "name": "fahm-encompass",
+      "source": "./plugins/fahm-encompass",
+      "description": "ICE Mortgage Technology Encompass Developer Connect reference for FAHM: authentication, canonical field IDs, pipeline query construction, SCIM account linking, and per-user data scoping.",
+      "category": "integrations",
+      "tags": ["encompass", "ice-mortgage-technology", "los", "mortgage", "scim"]
+    }
+  ]
+}

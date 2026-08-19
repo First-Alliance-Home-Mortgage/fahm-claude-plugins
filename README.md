@@ -1,0 +1,115 @@
+# FAHM Claude Code plugins
+
+A private Claude Code **plugin marketplace** for First Alliance Home Mortgage.
+
+| Plugin | Skills | What it is for |
+|---|---|---|
+| [`fahm-docs`](plugins/fahm-docs/) | `docs-answers`, `knowledge-docs`, `project-turnover` | Portable documentation tooling. Useful in every repo |
+| [`fahm-encompass`](plugins/fahm-encompass/) | `encompass-api` | The ICE Encompass Developer Connect reference. Useful in the four repos that touch Encompass |
+
+Two plugins rather than one, deliberately: `version` is the update gate, and Encompass facts change
+whenever ICE changes an endpoint while the docs tooling changes almost never. Splitting also lets a
+repo enable only what it needs — a disabled plugin costs nothing in the skill listing.
+
+## Install
+
+```
+/plugin marketplace add First-Alliance-Home-Mortgage/fahm-claude-plugins
+/plugin install fahm-docs@fahm-claude-plugins
+/plugin install fahm-encompass@fahm-claude-plugins
+```
+
+> **Add the marketplace by `owner/repo` or git URL — never by a raw-file URL.** The plugin sources
+> here are relative paths, and a raw fetch downloads only `marketplace.json`, so nothing resolves.
+
+A private repo works over your existing git credentials. A teammate whose credentials do not reach
+the `First-Alliance-Home-Mortgage` org gets a **clone failure, not a permissions prompt** — an
+unhelpful error to debug, so check org membership first.
+
+### Zero-touch enrolment for a project
+
+Commit this into a consuming repo's `.claude/settings.json` and the marketplace is added
+automatically once the teammate trusts the folder — no separate prompt, no install step:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "fahm-claude-plugins": {
+      "source": { "source": "github", "repo": "First-Alliance-Home-Mortgage/fahm-claude-plugins" }
+    }
+  },
+  "enabledPlugins": {
+    "fahm-docs@fahm-claude-plugins": true,
+    "fahm-encompass@fahm-claude-plugins": true
+  }
+}
+```
+
+Enable `fahm-encompass` only in repos that actually touch Encompass. Marketplace state itself lives
+once per user in `~/.claude/plugins/known_marketplaces.json`, not per project.
+
+## Not pushed yet
+
+This repository exists locally only. To publish it:
+
+1. In the GitHub UI, create `First-Alliance-Home-Mortgage/fahm-claude-plugins` as **Private**. Do
+   **not** initialise it with a README, `.gitignore` or licence — this repo already has all three, and
+   an initialised remote forces a merge on the first push.
+2. `git remote add origin git@github.com:First-Alliance-Home-Mortgage/fahm-claude-plugins.git`
+3. `git push -u origin main`
+4. Re-verify from the remote on a second machine. That is the only real test of the relative plugin
+   sources.
+
+Confirm first that the account creating it holds repo-creation rights in the org.
+
+> Keeping `plugins/` **inside** this repository is deliberate, not just tidy. For the claude.ai
+> Team/Enterprise plugin-sync path, private plugin sources must share the marketplace repo's owner —
+> so private plugins have to live here and be referenced by relative path, not as separate repos.
+
+## Validate before committing
+
+```bash
+node scripts/validate-repo.mjs
+```
+
+Offline, zero dependencies, no network. Checks manifest structure, the `.claude-plugin/` layout rule,
+frontmatter portability, description budget, forbidden path forms, relative-link resolution, and runs
+a secret scan. It is the same check the GitHub Actions workflow runs.
+
+Then, with the Claude Code CLI:
+
+```
+claude plugin validate .
+claude plugin validate ./plugins/fahm-docs --strict
+claude --plugin-dir ./plugins/fahm-encompass
+```
+
+> `/reload-plugins` counts only `commands/` directories in its summary, so it reports **0 skills**
+> for both plugins here. That is a known reporting defect, not a failure — confirm from the skill
+> listing instead.
+
+## Migrating from user-level skills
+
+The three `fahm-docs` skills previously lived in `~/.claude/skills/`. **Do not run both copies.** A
+personal skill and a plugin skill of the same name can both load in one session — two near-identical
+descriptions in the listing, double budget cost, and unpredictable selection when the model fires by
+description rather than by slash command.
+
+Retire the originals before installing the plugin, and rename rather than delete so rollback is one
+command:
+
+```powershell
+Rename-Item "$env:USERPROFILE\.claude\skills" "skills.premigration"
+```
+
+## Contributing
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before adding a skill. Two rules there are not preferences:
+the **portable-frontmatter** rule (anything outside the six-key subset is a hard error on a
+claude.ai/Skills API upload) and the **description budget** (the skill listing has a bounded context
+allowance, and on overflow Claude Code silently drops descriptions — a dropped description means the
+skill stops firing, with no error).
+
+---
+
+*Proprietary — First Alliance Home Mortgage. All rights reserved.*

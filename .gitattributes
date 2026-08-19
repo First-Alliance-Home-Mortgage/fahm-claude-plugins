@@ -1,0 +1,8 @@
+# Normalise line endings. The machines authoring this repo are Windows, but the
+# .mjs scripts will eventually run on a Linux CI runner.
+* text=auto eol=lf
+
+*.md   text eol=lf
+*.mjs  text eol=lf
+*.json text eol=lf
+*.yml  text eol=lf

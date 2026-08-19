@@ -1,0 +1,13 @@
+{
+  "name": "fahm-docs",
+  "version": "1.0.0",
+  "description": "Documentation tooling: answer questions from a repo's own docs with citations and drift reporting, write or repair engineering and knowledge-base docs, and produce project turnover packs.",
+  "author": {
+    "name": "First Alliance Home Mortgage",
+    "email": "rrebucas@fahmloans.com"
+  },
+  "homepage": "https://github.com/First-Alliance-Home-Mortgage/fahm-claude-plugins",
+  "repository": "https://github.com/First-Alliance-Home-Mortgage/fahm-claude-plugins",
+  "license": "LicenseRef-FAHM-Proprietary",
+  "keywords": ["documentation", "docs", "runbook", "turnover", "handover", "knowledge-base"]
+}

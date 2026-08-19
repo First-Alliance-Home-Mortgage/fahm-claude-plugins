@@ -1,0 +1,38 @@
+# Inert until this repository has a remote — see README.md, "Not pushed yet".
+# Committed now so the first push already has a gate, rather than one somebody
+# remembers to add later.
+#
+# Deliberately does NOT run `claude plugin validate`: that needs the CLI
+# installed and possibly authenticated. It stays a local step.
+
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # Structure, frontmatter portability, description budget, forbidden path
+      # forms, link resolution, and the secret scan. Zero dependencies.
+      - name: Validate marketplace, plugins and skills
+        run: node scripts/validate-repo.mjs
+
+      # The bundled scripts must run offline with no credentials.
+      - name: Smoke-test bundled scripts
+        run: |
+          node plugins/fahm-encompass/skills/encompass-api/scripts/resolve-field.mjs Fields.1997
+          node plugins/fahm-encompass/skills/encompass-api/scripts/resolve-field.mjs --list > /dev/null

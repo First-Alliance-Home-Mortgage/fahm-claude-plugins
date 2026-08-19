@@ -1,0 +1,13 @@
+{
+  "name": "fahm-encompass",
+  "version": "0.1.0",
+  "description": "ICE Mortgage Technology Encompass Developer Connect integration reference for First Alliance Home Mortgage — authentication, canonical field IDs, loan pipeline query construction, SCIM account linking, and per-user data scoping.",
+  "author": {
+    "name": "First Alliance Home Mortgage",
+    "email": "rrebucas@fahmloans.com"
+  },
+  "homepage": "https://github.com/First-Alliance-Home-Mortgage/fahm-claude-plugins",
+  "repository": "https://github.com/First-Alliance-Home-Mortgage/fahm-claude-plugins",
+  "license": "LicenseRef-FAHM-Proprietary",
+  "keywords": ["encompass", "ice-mortgage-technology", "elliemae", "developer-connect", "los", "mortgage", "scim"]
+}
