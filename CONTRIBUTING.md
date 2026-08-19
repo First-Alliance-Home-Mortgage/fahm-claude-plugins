@@ -147,8 +147,9 @@ review — never `git add -f`.
 
 ## 6. Releasing
 
-1. `node scripts/validate-repo.mjs`
-2. `claude plugin validate .` and `claude plugin validate ./plugins/<name> --strict`
+1. `node scripts/validate-repo.mjs` — this is the check that enforces rules 1–5
+2. `claude plugin validate .` and `claude plugin validate ./plugins/<name>` — **manifests only**;
+   it does not read SKILL.md, so it cannot catch a frontmatter or description problem
 3. `claude --plugin-dir ./plugins/<name>` — smoke-test the change in a real session
 4. **Bump `version` in the owning `plugin.json`.** That string is the update gate: teammates get the
    change only when it changes. A substantive edit without a bump ships to nobody.

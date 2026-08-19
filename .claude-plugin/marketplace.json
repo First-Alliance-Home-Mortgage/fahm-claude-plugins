@@ -8,6 +8,9 @@
     "email": "rrebucas@fahmloans.com",
     "url": "https://github.com/First-Alliance-Home-Mortgage"
   },
+  "metadata": {
+    "description": "Internal Claude Code plugins for First Alliance Home Mortgage: documentation tooling and the ICE Encompass Developer Connect integration reference."
+  },
   "plugins": [
     {
       "name": "fahm-docs",

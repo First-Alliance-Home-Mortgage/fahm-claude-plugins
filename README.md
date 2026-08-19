@@ -80,9 +80,14 @@ Then, with the Claude Code CLI:
 
 ```
 claude plugin validate .
-claude plugin validate ./plugins/fahm-docs --strict
+claude plugin validate ./plugins/fahm-docs
+claude plugin validate ./plugins/fahm-encompass
 claude --plugin-dir ./plugins/fahm-encompass
 ```
+
+`claude plugin validate` checks the **manifest only** — it does not read SKILL.md files. Everything
+in rules 1–5 of CONTRIBUTING.md is enforced by `scripts/validate-repo.mjs`, so run that first.
+(Some documentation mentions a `--strict` flag; it is not present in the installed CLI.)
 
 > `/reload-plugins` counts only `commands/` directories in its summary, so it reports **0 skills**
 > for both plugins here. That is a known reporting defect, not a failure — confirm from the skill
